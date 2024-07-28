@@ -5,43 +5,43 @@ Jaba RESTful API criada para o Boot Camp Santander Backend
 
 ```mermaid
 classDiagram
-    class Felipe {
+    class BankUser {
+        -String name
+        +getAccount(): Account
+        +getCard(): Card
+        +getFeatures(): List~Feature~
+        +getNews(): List~News~
     }
+
     class Account {
-        Number: String
-        Agency: String
-        Balance: float
-        Limit: float
+        -String number
+        -String agency
+        -float balance
+        -float limit
+        +deposit(amount: float)
+        +withdraw(amount: float)
     }
+
     class Feature {
-        Icon: String
-        Description: String
+        -String icon
+        -String description
     }
+
     class Card {
-        Number: String
-        Limit: float
+        -String number
+        -float limit
+        +makePurchase(amount: float)
     }
-    class New {
-        Icon: String
-        Description: String
+
+    class News {
+        -String icon
+        -String description
     }
-    
-    Felipe --> Account
-    Account : Number = "00000-0"
-    Account : Agency = "0000"
-    Account : Balance = 12324.56
-    Account : Limit = 1000.00
-    
-    Felipe --> Feature
-    Feature : Icon = "URL"
-    Feature : Description = "Descrição da Feature"
-    
-    Felipe --> Card
-    Card : Number = "xxxx xxxx xxxx 0000"
-    Card : Limit = 1000.00
-    
-    Felipe --> New
-    New : Icon = "URL"
-    New : Description = "Descrição da Novidade"
+
+    BankUser  "1"* -- "1" Account 
+    BankUser  "1" *-- "1" Card 
+    BankUser  "1" *-- "N" Feature 
+    BankUser  "1" *-- "N" News 
+
 
 ```
